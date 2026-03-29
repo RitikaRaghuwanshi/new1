@@ -54,7 +54,7 @@ async function seed() {
 
   // Seed admin and TPO
   await User.create({ name: 'Admin User',    email: 'admin@it.edu', password: 'admin123', role: 'admin' })
-  await User.create({ name: 'Dr. Rakesh Jain', email: 'tpo@it.edu', password: 'tpo123',   role: 'tpo'   })
+  await User.create({ name: 'Rakesh Jain', email: 'tpo@it.edu', password: 'tpo123',   role: 'tpo'   })
   console.log('✅ Admin and TPO created')
 
   // Seed faculty

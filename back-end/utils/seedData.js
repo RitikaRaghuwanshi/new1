@@ -114,7 +114,7 @@ async function seed() {
   // Admin
   await User.create({ name: 'Admin User', email: 'admin@it.edu', password: 'admin123', role: 'admin' });
   // TPO
-  await User.create({ name: 'Dr. Rakesh Jain', email: 'tpo@it.edu', password: 'tpo123', role: 'tpo' });
+  await User.create({ name: 'Rakesh Jain', email: 'tpo@it.edu', password: 'tpo123', role: 'tpo' });
 
   const students = [];
 
