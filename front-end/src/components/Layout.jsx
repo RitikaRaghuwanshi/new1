@@ -4,7 +4,7 @@ import { useAuth } from '../context/AuthContext'
 import {
   LayoutDashboard, Users, Upload, BarChart3, GraduationCap,
   Target, Filter, User, TrendingUp, LogOut, ChevronRight, Bell,
-  ClipboardList, PenLine, BookOpen, Calculator
+  FolderUp,
 } from 'lucide-react'
 
 const navConfig = {
@@ -25,7 +25,8 @@ const navConfig = {
     { to: '/student/readiness', icon: TrendingUp,      label: 'My Readiness'   },
   ],
   faculty: [
-    { to: '/faculty',     icon: LayoutDashboard, label: 'Dashboard'        },
+    { to: '/faculty',             icon: LayoutDashboard, label: 'Dashboard'   },
+    { to: '/faculty/upload-docs', icon: FolderUp,        label: 'Upload Docs' },
   ],
 }
 

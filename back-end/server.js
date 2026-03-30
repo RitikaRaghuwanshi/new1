@@ -6,6 +6,7 @@ const mongoose = require('mongoose')
 const cors     = require('cors')
 const morgan   = require('morgan')
 const path     = require('path')
+const fs       = require('fs')
 
 const app = express()
 
@@ -21,17 +22,17 @@ app.use(express.urlencoded({ extended: true }))
 app.use(morgan('dev'))
 
 const uploadsDir = path.join(__dirname, 'uploads')
-const fs = require('fs')
 if (!fs.existsSync(uploadsDir)) fs.mkdirSync(uploadsDir, { recursive: true })
 app.use('/uploads', express.static(uploadsDir))
 
-// Routes (each mounted only once)
+// Routes
 app.use('/api/auth',      require('./routes/auth.routes'))
 app.use('/api/students',  require('./routes/student.routes'))
 app.use('/api/tpo',       require('./routes/tpo.routes'))
 app.use('/api/analytics', require('./routes/analytics.routes'))
 app.use('/api/admin',     require('./routes/admin.routes'))
 app.use('/api/faculty',   require('./routes/faculty.routes'))
+app.use('/api/documents', require('./routes/document.routes'))   // ← NEW
 
 app.get('/health', (_req, res) => res.json({ status: 'ok', service: 'AcadPlace API' }))
 app.get('/',       (_req, res) => res.json({ message: 'Academic Placement API is running' }))
