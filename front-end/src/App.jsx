@@ -16,6 +16,7 @@ import ReadinessScore from './pages/student/ReadinessScore'
 import FacultyDashboard from './pages/faculty/FacultyDashboard'
 import UploadDocs from './pages/faculty/UploadDocs'         // ← NEW
 import Layout from './components/Layout'
+import StudentDocuments from './pages/student/StudentDocuments'
 
 function ProtectedRoute({ children, roles }) {
   const { user, loading } = useAuth()
@@ -52,6 +53,7 @@ function AppRoutes() {
         <Route index element={<StudentDashboard />} />
         <Route path="profile"   element={<UpdateProfile />} />
         <Route path="readiness" element={<ReadinessScore />} />
+        <Route path="documents" element={<StudentDocuments />} />
       </Route>
 
       <Route path="/faculty" element={<ProtectedRoute roles={['faculty']}><Layout /></ProtectedRoute>}>

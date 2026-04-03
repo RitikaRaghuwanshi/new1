@@ -6,6 +6,7 @@ import {
   Target, Filter, User, TrendingUp, LogOut, ChevronRight, Bell,
   FolderUp,
 } from 'lucide-react'
+import { FileText } from 'lucide-react'
 
 const navConfig = {
   admin: [
@@ -23,6 +24,7 @@ const navConfig = {
     { to: '/student',           icon: LayoutDashboard, label: 'My Dashboard'   },
     { to: '/student/profile',   icon: User,            label: 'Update Profile' },
     { to: '/student/readiness', icon: TrendingUp,      label: 'My Readiness'   },
+    { to: '/student/documents', icon: FileText, label: 'Study Materials' },
   ],
   faculty: [
     { to: '/faculty',             icon: LayoutDashboard, label: 'Dashboard'   },

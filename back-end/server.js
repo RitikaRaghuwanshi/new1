@@ -1,3 +1,6 @@
+const dns = require('dns')
+dns.setServers(['8.8.8.8', '8.8.4.4'])
+
 const dotenv = require('dotenv')
 dotenv.config()
 
@@ -42,7 +45,7 @@ app.use((err, _req, res, _next) => {
   res.status(500).json({ success: false, message: err.message || 'Server Error' })
 })
 
-const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/acadplace'
+const MONGO_URI = process.env.MONGO_URI 
 
 mongoose.connect(MONGO_URI)
   .then(() => {
