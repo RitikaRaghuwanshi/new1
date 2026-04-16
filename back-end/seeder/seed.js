@@ -4,7 +4,7 @@ require('dotenv').config()
 const mongoose = require('mongoose')
 const Faculty  = require('../models/faculty')
 const Student  = require('../models/Student')
-const User     = require('.cmd./models/User')
+const User = require('../models/User');
 const { calculateReadinessScore, analyzeSkillGap } = require('../controllers/analytics.controller')
 
 const skills    = ['React','Node.js','MongoDB','Python','Java','SQL','AWS','Docker','Git','JavaScript','TypeScript','Django','Flask','Machine Learning','REST API']
