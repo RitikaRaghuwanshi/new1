@@ -9,10 +9,18 @@ exports.login = async (req, res) => {
     if (!email || !password)
       return res.status(400).json({ message: 'Email and password required' });
 
-    // 1. Check Faculty first
-    const faculty = await Faculty.findOne({ email });
+    // 1. Check Faculty first — FIX: added .select('+password') so hashed password aaye
+    const faculty = await Faculty.findOne({ email }).select('+password');
     if (faculty) {
-      const isMatch = await faculty.comparePassword(password);
+      // FIX: agar comparePassword method nahi hai model mein, bcrypt direct use karo
+      let isMatch = false;
+      if (typeof faculty.comparePassword === 'function') {
+        isMatch = await faculty.comparePassword(password);
+      } else {
+        const bcrypt = require('bcryptjs');
+        isMatch = await bcrypt.compare(password, faculty.password);
+      }
+
       if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
       if (!faculty.isActive) return res.status(403).json({ message: 'Account inactive' });
 
@@ -38,7 +46,14 @@ exports.login = async (req, res) => {
     const user = await User.findOne({ email }).select('+password');
     if (!user) return res.status(401).json({ message: 'Invalid credentials' });
 
-    const isMatch = await user.comparePassword(password);
+    let isMatch = false;
+    if (typeof user.comparePassword === 'function') {
+      isMatch = await user.comparePassword(password);
+    } else {
+      const bcrypt = require('bcryptjs');
+      isMatch = await bcrypt.compare(password, user.password);
+    }
+
     if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
     if (!user.isActive) return res.status(403).json({ message: 'Account inactive' });
 

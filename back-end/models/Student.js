@@ -41,11 +41,24 @@ const internshipSchema = new mongoose.Schema({
 }, { _id: false })
 
 const attendanceSchema = new mongoose.Schema({
-  subject:          { type: String },
-  subjectCode:      { type: String },
-  semester:         { type: Number },
-  totalClasses:     { type: Number, default: 0 },
-  attendedClasses:  { type: Number, default: 0 },
+  subject:         { type: String },
+  subjectCode:     { type: String },
+  semester:        { type: Number },
+  totalClasses:    { type: Number, default: 0 },
+  attendedClasses: { type: Number, default: 0 },
+}, { _id: false })
+
+// ── NEW: Parent / Guardian info ───────────────────────────────────────────────
+const parentInfoSchema = new mongoose.Schema({
+  fatherName:       { type: String, trim: true },
+  fatherOccupation: { type: String, trim: true },
+  fatherPhone:      { type: String, trim: true },
+  motherName:       { type: String, trim: true },
+  motherOccupation: { type: String, trim: true },
+  motherPhone:      { type: String, trim: true },
+  guardianName:     { type: String, trim: true },   // optional guardian
+  guardianPhone:    { type: String, trim: true },
+  annualIncome:     { type: Number },                // family annual income
 }, { _id: false })
 
 const studentSchema = new mongoose.Schema({
@@ -58,6 +71,22 @@ const studentSchema = new mongoose.Schema({
   batch:                   { type: String, default: '2022-2026' },
   semester:                { type: Number, default: 8, min: 1, max: 8 },
   year:                    { type: Number, default: 4 },
+
+  // ── Personal Information (NEW) ──────────────────────────────────────────────
+  passportPhotoUrl:        { type: String },                                      // Cloudinary / S3 URL
+  dateOfBirth:             { type: Date },
+  gender:                  { type: String, enum: ['male', 'female', 'other'] },
+  bloodGroup:              { type: String, enum: ['A+','A-','B+','B-','AB+','AB-','O+','O-'] },
+  aadharNumber:            { type: String, trim: true },                          // 12-digit Aadhar
+  address: {
+    street:   { type: String, trim: true },
+    city:     { type: String, trim: true },
+    state:    { type: String, trim: true },
+    pincode:  { type: String, trim: true },
+  },
+  parentInfo:              { type: parentInfoSchema, default: () => ({}) },
+  // ───────────────────────────────────────────────────────────────────────────
+
   cgpa:                    { type: Number, default: 0, min: 0, max: 10 },
   semesterResults:         [semesterResultSchema],
   totalBacklogs:           { type: Number, default: 0 },
@@ -82,7 +111,6 @@ const studentSchema = new mongoose.Schema({
   extraCurricular:         [String],
   isActive:                { type: Boolean, default: true },
 }, { timestamps: true })
-
 
 studentSchema.index({ cgpa: -1 })
 studentSchema.index({ placementReadinessScore: -1 })

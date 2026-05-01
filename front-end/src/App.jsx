@@ -14,7 +14,8 @@ import StudentDashboard from './pages/student/StudentDashboard'
 import UpdateProfile from './pages/student/UpdateProfile'
 import ReadinessScore from './pages/student/ReadinessScore'
 import FacultyDashboard from './pages/faculty/FacultyDashboard'
-import UploadDocs from './pages/faculty/UploadDocs'         // ← NEW
+import UploadDocs from './pages/faculty/UploadDocs'
+import Attendance from './pages/faculty/Attendance'   // ← NEW
 import Layout from './components/Layout'
 import StudentDocuments from './pages/student/StudentDocuments'
 
@@ -58,7 +59,8 @@ function AppRoutes() {
 
       <Route path="/faculty" element={<ProtectedRoute roles={['faculty']}><Layout /></ProtectedRoute>}>
         <Route index element={<FacultyDashboard />} />
-        <Route path="upload-docs" element={<UploadDocs />} />   {/* ← NEW */}
+        <Route path="upload-docs" element={<UploadDocs />} />
+        <Route path="attendance"  element={<Attendance />} />   {/* ← NEW */}
       </Route>
 
       <Route path="/unauthorized" element={

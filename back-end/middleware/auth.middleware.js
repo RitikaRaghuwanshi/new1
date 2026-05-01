@@ -1,5 +1,5 @@
 const jwt     = require('jsonwebtoken')
-const Faculty = require('../models/faculty')
+const Faculty = require('../models/Faculty')
 const User    = require('../models/User')
 
 const JWT_SECRET = process.env.JWT_SECRET || 'acadplace_secret_key'
